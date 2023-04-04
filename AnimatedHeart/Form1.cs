@@ -4,7 +4,7 @@ namespace AnimatedHeart
     {
         Image heart;
         System.Windows.Forms.Timer textTimer;
-        string displayText = "I love you";
+        string displayText = "I Love You Paige";
         int textPosition = 0;
         SizeF textSize;
 
@@ -27,11 +27,11 @@ namespace AnimatedHeart
 
         private void TextTimer_Tick(object sender, EventArgs e)
         {
-            // Update the position of the text
+            
             textPosition += 5 * textDirection;
             if (textPosition + textSize.Width > this.Width || textPosition < 0)
             {
-                // Reverse the direction of the text when it hits the edges
+                
                 textDirection *= -1;
             }
             this.Invalidate();
@@ -47,7 +47,7 @@ namespace AnimatedHeart
             e.Graphics.DrawImage(heart, new Point(385, 0));
 
 
-            Font font = new Font("Arial", 32);
+            Font font = new Font("Arial", 54);
             Brush brush = Brushes.Purple;
             textSize = e.Graphics.MeasureString(displayText, font);
             e.Graphics.DrawString(displayText, font, brush, new PointF(textPosition, this.Height / 2 - textSize.Height));
