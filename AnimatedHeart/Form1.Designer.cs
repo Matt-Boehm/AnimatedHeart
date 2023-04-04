@@ -5,7 +5,9 @@
         
         private System.ComponentModel.IContainer components = null;
 
-        
+        public EventHandler Form1_Load { get; private set; }
+
+
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
@@ -30,7 +32,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Name = "Form1";
             this.Text = "HeartAnimation";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            //this.Load += new System.EventHandler(this.Form1_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.DrawAnimationsPaintEvent);
             this.ResumeLayout(false);
 
