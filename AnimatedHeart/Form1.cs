@@ -29,30 +29,30 @@ namespace AnimatedHeart
 
         private void TextTimer_Tick(object sender, EventArgs e)
         {
-            // Update the position of the text
+            
             textPositionX += 5 * textDirectionX;
             if (textPositionX + textSize.Width > this.Width)
             {
-                // Text hit the right edge, reverse direction and move left
+                
                 textDirectionX *= -1;
                 textPositionX = (int)(this.Width - textSize.Width);
             }
             else if (textPositionX < 0)
             {
-                // Text hit the left edge, reverse direction and move right
+               
                 textDirectionX *= -1;
                 textPositionX = 0;
             }
             textPositionY += 5 * textDirectionY;
             if (textPositionY + textSize.Height > this.Height)
             {
-                // Text hit the bottom edge, reverse direction and move up
+                
                 textDirectionY *= -1;
                 textPositionY = (int)(this.Height - textSize.Height);
             }
             else if (textPositionY < 0)
             {
-                // Text hit the top edge, reverse direction and move down
+               
                 textDirectionY *= -1;
                 textPositionY = 0;
             }
