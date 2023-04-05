@@ -5,7 +5,8 @@ namespace AnimatedHeart
         Image heart;
         System.Windows.Forms.Timer textTimer;
         string displayText = "I Love You Paige";
-        int textPosition = 0;
+        int textPositionX = 0;
+        int textPositionY = 0;
         SizeF textSize;
 
         public Form1()
@@ -23,21 +24,41 @@ namespace AnimatedHeart
             textTimer.Start();
         }
 
-        private int textDirection = 1;
+        private int textDirectionX = 1;
+        private int textDirectionY = 1;
 
         private void TextTimer_Tick(object sender, EventArgs e)
         {
-            
-            textPosition += 5 * textDirection;
-            if (textPosition + textSize.Width > this.Width || textPosition < 0)
+            // Update the position of the text
+            textPositionX += 5 * textDirectionX;
+            if (textPositionX + textSize.Width > this.Width)
             {
-                
-                textDirection *= -1;
+                // Text hit the right edge, reverse direction and move left
+                textDirectionX *= -1;
+                textPositionX = (int)(this.Width - textSize.Width);
             }
+            else if (textPositionX < 0)
+            {
+                // Text hit the left edge, reverse direction and move right
+                textDirectionX *= -1;
+                textPositionX = 0;
+            }
+            textPositionY += 5 * textDirectionY;
+            if (textPositionY + textSize.Height > this.Height)
+            {
+                // Text hit the bottom edge, reverse direction and move up
+                textDirectionY *= -1;
+                textPositionY = (int)(this.Height - textSize.Height);
+            }
+            else if (textPositionY < 0)
+            {
+                // Text hit the top edge, reverse direction and move down
+                textDirectionY *= -1;
+                textPositionY = 0;
+            }
+
             this.Invalidate();
         }
-
-
 
 
         private void DrawAnimationsPaintEvent(object sender, PaintEventArgs e)
@@ -46,11 +67,10 @@ namespace AnimatedHeart
             e.Graphics.DrawImage(heart, new Point(-75, 0));
             e.Graphics.DrawImage(heart, new Point(385, 0));
 
-
-            Font font = new Font("Arial", 54);
+            Font font = new Font("Arial", 50);
             Brush brush = Brushes.Purple;
             textSize = e.Graphics.MeasureString(displayText, font);
-            e.Graphics.DrawString(displayText, font, brush, new PointF(textPosition, this.Height / 2 - textSize.Height));
+            e.Graphics.DrawString(displayText, font, brush, new PointF(textPositionX, textPositionY));
         }
 
         private void LoadImages()
@@ -66,3 +86,5 @@ namespace AnimatedHeart
         }
     }
 }
+
+
