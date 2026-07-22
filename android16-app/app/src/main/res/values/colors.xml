@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="gridcove_background">#07111F</color>
+    <color name="gridcove_status">#07111F</color>
+    <color name="gridcove_nav">#07111F</color>
+</resources>
