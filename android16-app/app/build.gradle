@@ -1,0 +1,52 @@
+plugins {
+    id "com.android.application"
+}
+
+android {
+    namespace "com.gridcove.bot.android16"
+    compileSdk 36
+
+    defaultConfig {
+        applicationId "com.gridcove.bot.android16"
+        minSdk 26
+        targetSdk 36
+        versionCode 3
+        versionName "1.0.3"
+    }
+
+    signingConfigs {
+        release {
+            storeFile file("${rootProject.projectDir}/signing/gridcove-bot-release.jks")
+            storePassword System.getenv("GRIDCOVE_STORE_PASSWORD") ?: ""
+            keyAlias System.getenv("GRIDCOVE_KEY_ALIAS") ?: "gridcove"
+            keyPassword System.getenv("GRIDCOVE_KEY_PASSWORD") ?: ""
+            enableV1Signing true
+            enableV2Signing true
+            enableV3Signing true
+            enableV4Signing false
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            shrinkResources false
+            signingConfig signingConfigs.release
+        }
+        debug {
+            applicationIdSuffix ".debug"
+            versionNameSuffix "-debug"
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    packaging {
+        resources {
+            excludes += ["META-INF/DEPENDENCIES", "META-INF/LICENSE*", "META-INF/NOTICE*"]
+        }
+    }
+}
